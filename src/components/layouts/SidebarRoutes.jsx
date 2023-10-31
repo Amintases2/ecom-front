@@ -1,67 +1,83 @@
 import {BsFillPersonLinesFill} from "react-icons/Bs";
-import {MdContacts} from "react-icons/Md";
-import {FaList} from "react-icons/fa";
+import {AiOutlineShoppingCart} from "react-icons/Ai";
+import {LiaSnowflakeSolid} from "react-icons/Lia";
+import {AiOutlineHistory} from "react-icons/Ai";
+import {AiOutlineDatabase} from "react-icons/Ai";
+import {FiSettings} from "react-icons/Fi";
+import {ImExit} from "react-icons/Im";
+import {SlLogin} from "react-icons/Sl";
+import {TbMessage2Exclamation} from "react-icons/Tb";
+
 
 const sidebarRoutes = [
     {
         title: 'Data',
-        links: [{
-            title: 'Manage Team',
-            path: '/manage-team',
-            icon: <BsFillPersonLinesFill/>
-        },
+        links: [
             {
-                title: 'Contacts Information',
+                title: 'Магазин',
+                path: '/',
+                icon: <AiOutlineShoppingCart/>
+            },
+            {
+                title: 'История покупок',
+                path: '/my-history',
+                icon: <AiOutlineHistory/>
+            },
+            {
+                title: 'Заморожено',
                 path: '/contacts-information',
-                icon: <MdContacts/>
-            },
-            {
-                title: 'Invoice Balance',
-                path: '/invoice-balance',
-                icon: <FaList/>
+                icon: <LiaSnowflakeSolid/>
             },
         ]
     },
     {
-        title: 'Pages',
-        links: [{
-            title: 'Profile Form',
-            path: '/profile-form',
-            icon: <BsFillPersonLinesFill/>
-        },
+        title: 'Contacts',
+        links: [
             {
-                title: 'Calendar',
-                path: '/calendar',
-                icon: <BsFillPersonLinesFill/>
-            },
-            {
-                title: 'Calendar',
-                path: '/calendar',
+                title: 'Связь с нами',
+                path: '/contact-us',
                 icon: <BsFillPersonLinesFill/>
             },
         ]
     },
     {
-        title: 'Charts',
-        links: [{
-            title: 'Profile Form',
-            path: '/profile-form',
-            icon: <BsFillPersonLinesFill/>
-        },
+        title: 'Admin',
+        links: [
             {
-                title: 'Calendar',
-                path: '/calendar',
-                icon: <BsFillPersonLinesFill/>
+                title: 'Заявки',
+                path: '/calendar2',
+                icon: <TbMessage2Exclamation/>
             },
             {
-                title: 'Calendar',
-                path: '/calendar',
-                icon: <BsFillPersonLinesFill/>
+                title: 'Товары',
+                path: '/products',
+                icon: <AiOutlineDatabase/>
             },
             {
-                title: 'Calendar',
-                path: '/calendar',
-                icon: <BsFillPersonLinesFill/>
+                title: 'Настройки',
+                path: '/calendar1',
+                icon: <FiSettings/>
+            },
+
+            // {
+            //     title: 'История',
+            //     path: '/calendar3',
+            //     icon: <AiOutlineHistory/>
+            // },
+        ]
+    },
+    {
+        title: 'Log',
+        links: [
+            {
+                title: 'Вход',
+                path: '/contact-us1',
+                icon: <SlLogin/>
+            },
+            {
+                title: 'Выход',
+                path: '/contact-us2',
+                icon: <ImExit/>
             },
         ]
     },

@@ -1,5 +1,6 @@
 import Avatar from "../../assets/user.png";
-import {SideBarProfileWrapper} from "./SidebarStyled.jsx";
+import {SideBarProfileWrapper} from "../../styles/SidebarStyled.jsx";
+
 
 export function SideBarProfile(props) {
     return (
@@ -9,7 +10,7 @@ export function SideBarProfile(props) {
                     <img src={Avatar} alt=""/>
                 </div>
                 <h2>Marat Gabitov</h2>
-                <h5>Smart Admin</h5>
+                <h5>Balance: 500$</h5>
             </SideBarProfileWrapper>
         </>
     )

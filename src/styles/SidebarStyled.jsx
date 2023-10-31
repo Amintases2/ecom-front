@@ -1,7 +1,8 @@
 import styled, {keyframes} from 'styled-components';
 import {NavLink} from "react-router-dom";
-import {rotate} from "../../styles/animations.jsx";
-import {bodyColors, device} from "../../styles/global.jsx";
+import {bodyColors, device} from "./global.jsx";
+import {rotate} from "./animations.jsx";
+
 
 const openedSidebarBodyPadding = "20px 25px";
 const closedSidebarBodyPadding = "20px 10px";
@@ -21,20 +22,23 @@ const displayFlex = 'flex';
 const displayBlock = 'block';
 
 const SidebarStyled = styled.div`
-    overflow:auto;
-    position:absolute;
+    overflow-y:auto;
+    position: ${props => props.open ? 'fixed' : 'sticky'}; 
+    z-index:2;
     top:0;
-    width:100%;
+    left:0;
+    width:100vw;
+    height:${props => props.open ? '100vh' : 'auto'};
     background-color:${bodyColors.mainBlockBackgroundColor};
     color: ${bodyColors.mainTextColor};
     @media ${device.laptop} { 
         width: auto;
-        position: sticky; 
         height: 100vh;
+        position: sticky;  
     }
 `;
 
-const SideBarBody = styled.div` 
+const SideBarBody = styled.div`  
     transition: all 0.15s ease-out;
     min-width: ${props => props.open ? openedSidebarMinWidth : closedSidebarMinWidth};
     padding:  ${openedSidebarBodyPadding};
@@ -44,6 +48,7 @@ const SideBarBody = styled.div`
 `;
 
 const SideBarHeader = styled.div`
+
     display:flex;
     justify-content: ${openedSidebarBodyJustify};
     align-items:center;

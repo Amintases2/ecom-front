@@ -1,9 +1,9 @@
-import {createGlobalStyle} from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
 
 const bodyColors = {
     bodyBackgroundColor:"#141B2D",
     mainTextColor: "#fff",
-    semiTextColor: "rgb(76, 206, 172)",
+    semiTextColor: "#FFCF01",
     activeLinkColor: "rgb(104, 112, 250)",
     mainBlockBackgroundColor: "#1F2A40",
 }
@@ -55,5 +55,9 @@ const device = {
     desktopL: `(min-width: ${size.desktop})`
 };
 
+const HeadTitle = styled.h1`
+    color: ${bodyColors.mainTextColor};
+    font-size:4rem;
+`
 
-export {bodyColors, device, GlobalStyle}
+export {bodyColors, device, GlobalStyle, HeadTitle}

@@ -1,13 +1,10 @@
 import Homepage from "../pages/Homepage.jsx";
+import ShopPage from "../pages/Shop.jsx";
 
 export const ROUTES = [
   {
     path: '/',
-    element: <Homepage />,
-  },
-  {
-    path: '/manage-team',
-    element: <Homepage />,
+    element: <ShopPage />,
   },
   {
     path: '/about',

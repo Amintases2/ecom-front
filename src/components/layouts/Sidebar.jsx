@@ -1,26 +1,35 @@
 import {Outlet} from "react-router";
-import {SideBarBody, SideBarHeader, SidebarStyled} from "./SidebarStyled.jsx";
 import {HiOutlineMenu} from "react-icons/hi";
 import SideBarLinks from "./SidebarLinks.jsx";
 import {SideBarProfile} from "./SideBarProfile.jsx";
 import {useState} from "react";
+import {SideBarBody, SideBarHeader, SidebarStyled} from "../../styles/SidebarStyled.jsx";
 export default function Sidebar() {
 
     const [open, setOpen] = useState(false);
 
+    const style = {
+        display:'flex',
+        alignItems:'start',
+        flexWrap:'wrap',
+        width:'100%',
+    }
+
     return (
-        <div style={{display: 'flex', alignItems:'start'}}>
-            <SidebarStyled>
+        <div style={style}>
+            <SidebarStyled open={open}>
                 <SideBarBody open={open}>
                     <SideBarHeader open={open}>
-                        <h3>Dashboard</h3>
+                        <h3>Market</h3>
                         <button onClick={() => setOpen(!open)}><HiOutlineMenu/></button>
                     </SideBarHeader>
                     <SideBarProfile open={open}/>
                     <SideBarLinks open={open}/>
                 </SideBarBody>
             </SidebarStyled>
-            <Outlet/>
+            <div style={{padding: '20px', flex:'10%'}}>
+                <Outlet/>
+            </div>
         </div>
     )
 }
