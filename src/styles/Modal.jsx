@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {bodyColors} from "./global.jsx";
+import {bodyColors, device} from "./global.jsx";
 
 const ModalWrapper = styled.div`
     z-index:3;
@@ -19,11 +19,16 @@ const ModalWrapper = styled.div`
 `
 const ModalContent = styled.div`
     padding:20px;
+    height:100vh;
+    overflow:auto;
     background-color:${bodyColors.mainBlockBackgroundColor};
     transform: scale(${props => props.active ? '1' : '0.1'});
     transition: all 0.2s ease-in-out;
     > div{
         max-width:500px;
+    }
+    @media ${device.laptop} { 
+        height:auto;
     }
 `
 const SvgClose = styled.div`
