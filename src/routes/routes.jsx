@@ -1,45 +1,47 @@
 import Homepage from "../pages/Homepage.jsx";
-import ShopPage from "../pages/Shop.jsx";
+import ShopPage from "../pages/ShopPage.jsx";
+import LoginPage from "../pages/LoginPage.jsx";
+import MyHistoryPage from "../pages/MyHistoryPage.jsx";
 
 export const ROUTES = [
   {
-    path: '/',
+    path: "/",
     element: <ShopPage />,
   },
   {
-    path: '/about',
+    path: "/about",
     element: <Homepage />,
   },
   {
-    path: '/favorites/*',
+    path: "/my-history",
+    element: <MyHistoryPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
     element: <Homepage />,
   },
   {
-    path: '/auth',
+    path: "/logout",
     element: <Homepage />,
   },
   {
-    path: '/register',
+    path: "/characters",
     element: <Homepage />,
   },
   {
-    path: '/logout',
+    path: "/locations",
     element: <Homepage />,
   },
   {
-    path: '/characters',
+    path: "/episodes",
     element: <Homepage />,
   },
   {
-    path: '/locations',
-    element: <Homepage />,
-  },
-  {
-    path: '/episodes',
-    element: <Homepage />,
-  },
-  {
-    path: '*',
+    path: "*",
     element: <Homepage />,
   },
 ];

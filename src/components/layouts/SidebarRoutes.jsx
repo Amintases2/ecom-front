@@ -70,7 +70,7 @@ const sidebarRoutes = [
     links: [
       {
         title: "Вход",
-        path: "/contact-us1",
+        path: "/login",
         icon: <SlLogin />,
       },
       {
