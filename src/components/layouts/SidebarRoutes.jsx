@@ -7,16 +7,27 @@ import { FiSettings } from "react-icons/fi";
 import { ImExit } from "react-icons/im";
 import { SlLogin } from "react-icons/sl";
 import { TbMessage2Exclamation } from "react-icons/tb";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
+import { AdminContext } from "../../contexts/AdminContext";
 
-const sidebarRoutes = [
-  {
-    title: "Data",
+const unauthUserRoutes = {
+  Log: {
+    title: "Log",
     links: [
       {
-        title: "Магазин",
-        path: "/",
-        icon: <AiOutlineShoppingCart />,
+        title: "Вход",
+        path: "/login",
+        icon: <SlLogin />,
       },
+    ],
+  },
+};
+
+const authUserRoutes = {
+  Data: {
+    title: "Data",
+    links: [
       {
         title: "История покупок",
         path: "/my-history",
@@ -29,17 +40,20 @@ const sidebarRoutes = [
       },
     ],
   },
-  {
-    title: "Contacts",
+  Log: {
+    title: "Log",
     links: [
       {
-        title: "Связь с нами",
-        path: "/contact-us",
-        icon: <BsFillPersonLinesFill />,
+        title: "Выход",
+        path: "/contact-us2",
+        icon: <ImExit />,
       },
     ],
   },
-  {
+};
+
+const adminRoutes = {
+  Admin: {
     title: "Admin",
     links: [
       {
@@ -57,29 +71,56 @@ const sidebarRoutes = [
         path: "/calendar1",
         icon: <FiSettings />,
       },
-
-      // {
-      //     title: 'История',
-      //     path: '/calendar3',
-      //     icon: <AiOutlineHistory/>
-      // },
     ],
   },
-  {
-    title: "Log",
-    links: [
-      {
-        title: "Вход",
-        path: "/login",
-        icon: <SlLogin />,
-      },
-      {
-        title: "Выход",
-        path: "/contact-us2",
-        icon: <ImExit />,
-      },
-    ],
-  },
-];
+};
 
-export { sidebarRoutes };
+export const SidebarRoutes = () => {
+  const userContext = useContext(AuthContext);
+  const adminContext = useContext(AdminContext);
+  const routes = {
+    Data: {
+      title: "Data",
+      links: [
+        {
+          title: "Магазин",
+          path: "/",
+          icon: <AiOutlineShoppingCart />,
+        },
+      ],
+    },
+    Contacts: {
+      title: "Contacts",
+      links: [
+        {
+          title: "Связь с нами",
+          path: "/contact-us",
+          icon: <BsFillPersonLinesFill />,
+        },
+      ],
+    },
+    Admin: {
+      title: "",
+      links: [],
+    },
+    Log: {
+      title: "Log",
+      links: [],
+    },
+  };
+
+  if (userContext.isAuthenticated) {
+    routes.Data.links = routes.Data.links.concat(authUserRoutes.Data.links);
+    routes.Log.links = authUserRoutes.Log.links;
+  } else {
+    routes.Log.links = unauthUserRoutes.Log.links;
+  }
+
+  if (adminContext.isAdmin) {
+    routes.Admin = adminRoutes.Admin;
+  }
+
+  return routes;
+};
+
+//export { sidebarRoutes };

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { bodyColors, device } from "../styles/global.jsx";
-import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 
 const Pages = styled.div`
