@@ -11,7 +11,6 @@ import {
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
-import { AdminContext } from "../../contexts/AdminContext.jsx";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);

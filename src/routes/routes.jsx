@@ -2,6 +2,7 @@ import Homepage from "../pages/Homepage.jsx";
 import ShopPage from "../pages/ShopPage.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
 import MyHistoryPage from "../pages/MyHistoryPage.jsx";
+import LogoutPage from "../pages/LogoutPage.jsx";
 
 export const ROUTES = [
   {
@@ -26,7 +27,7 @@ export const ROUTES = [
   },
   {
     path: "/logout",
-    element: <Homepage />,
+    element: <LogoutPage />,
   },
   {
     path: "/characters",

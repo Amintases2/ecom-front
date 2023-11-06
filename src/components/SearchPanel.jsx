@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { bodyColors } from "../styles/global.jsx";
-import { AiOutlineSearch } from "react-icons/ai";
+import {bodyColors} from "../styles/global.jsx";
+import {AiOutlineSearch} from "react-icons/ai";
 
-const Search = styled.div`
+const Search = styled.form`
   margin: 10px;
   display: flex;
 
@@ -36,15 +36,21 @@ const Search = styled.div`
   }
 `;
 
-export default function SearchPanel() {
-  return (
-    <>
-      <Search>
-        <input type="text" placeholder="Search..." />
-        <button>
-          <AiOutlineSearch />
-        </button>
-      </Search>
-    </>
-  );
-}
+export {Search}
+
+// export default function SearchPanel({props}) {
+//
+//     return (
+//         <>
+//             <Search onSubmit={(event) => {
+//                 event.preventDefault();
+//                 props.refetch(props.item);
+//             }}>
+//                 <input onChange={(event) => props.setItem(event.target.value)} type="text" placeholder="Search..."/>
+//                 <button type="submit">
+//                     <AiOutlineSearch/>
+//                 </button>
+//             </Search>
+//         </>
+//     );
+// }

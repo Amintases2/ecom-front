@@ -1,79 +1,88 @@
 import mac from "../assets/products/mac.png";
-import SearchPanel from "../components/SearchPanel.jsx";
-import Pagination from "../components/Pagination";
+// import SearchPanel from "../components/SearchPanel.jsx";
+import Pagination, {Pages} from "../components/Pagination";
 import Modal from "../components/Modal.jsx";
-import { useState } from "react";
+import {useEffect, useRef, useState} from "react";
+import {useQuery} from "react-query";
 import {
-  ProductCard,
-  ProductsWrapper,
-  Discount,
-  DiscountWrapper,
+    ProductsWrapper,
 } from "../styles/Shop.jsx";
 
-import { ModalButtonsWrapper } from "../styles/Modal.jsx";
-import { HeadTitle } from "../styles/global.jsx";
+import {HeadTitle} from "../styles/global.jsx";
+import ProductServices from "../../services/ProductServices.jsx";
+import {Preloader, PreloaderWrapper} from "../styles/Preloader.jsx";
+import ProductCardComponent from "../components/shop/ProductCardComponent.jsx";
+import {AiOutlineSearch} from "react-icons/ai";
+import {Search} from "../components/SearchPanel.jsx";
 
 export default function ShopPage() {
-  const [modalActive, setModalActive] = useState(false);
-  const [buttonActive, setButtonActive] = useState(false);
-  return (
-    <>
-      <HeadTitle>Shopping List</HeadTitle>
-      <SearchPanel />
-      <ProductsWrapper>
-        <ProductCard onClick={() => setModalActive(!modalActive)}>
-          <DiscountWrapper>
-            <Discount>99%</Discount>
-          </DiscountWrapper>
-          <img src={mac} alt="" />
-          <h2>Macbook air 13</h2>
-          <Modal active={modalActive} setActive={setModalActive}>
-            <ProductCard>
-              <img src={mac} alt="" />
-              <h2>Macbook air 13</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                euismod sed lorem sed efficitur. Cras congue nisi non felis
-                semper, et vestibulum risus ornare. Fusce tristique auctor nisl,
-                eu tempus dui aliquam a. Aenean vulputate vestibulum velit, nec
-                viverra felis mattis a. Aliquam ac eleifend tellus. Nulla
-                hendrerit, justo non porta pellentesque, nunc est iaculis
-                ligula, sed molestie turpis turpis sit amet augue. Phasellus
-                vulputate quam sem, vel congue nulla bibendum quis. Sed
-                elementum massa et ante congue, id ullamcorper leo elementum.
-              </p>
-            </ProductCard>
-            <ModalButtonsWrapper active={buttonActive}>
-              <button onMouseOver={() => setButtonActive(true)}>
-                Забронировать
-              </button>
-              <button onMouseOver={() => setButtonActive(false)}>Купить</button>
-            </ModalButtonsWrapper>
-          </Modal>
-        </ProductCard>
-        <ProductCard>
-          <img src={mac} alt="" />
-          <h2>Macbook air 13</h2>
-        </ProductCard>
-        <ProductCard>
-          <img src={mac} alt="" />
-          <h2>Macbook air 13</h2>
-        </ProductCard>
-        <ProductCard>
-          <img src={mac} alt="" />
-          <h2>Macbook air 13</h2>
-        </ProductCard>
-        <ProductCard>
-          <img src={mac} alt="" />
-          <h2>Macbook air 13</h2>
-        </ProductCard>
-        <ProductCard>
-          <img src={mac} alt="" />
-          <h2>Macbook air 13</h2>
-        </ProductCard>
-      </ProductsWrapper>
 
-      <Pagination />
-    </>
-  );
+    const page = useRef(1);
+    const title = useRef('')
+    const {
+        data,
+        isLoading,
+        isError,
+        refetch,
+        isRefetching,
+        isFetching
+    } = useQuery('products', () => ProductServices.getProducts(title.current, page.current))
+
+
+    if (data) {
+        console.log(data.data.pages)
+    }
+
+    return (
+        <>
+            {isLoading && <PreloaderWrapper><Preloader/></PreloaderWrapper>}
+            {isRefetching && <PreloaderWrapper><Preloader/></PreloaderWrapper>}
+            <HeadTitle>Shopping List</HeadTitle>
+            <Search>
+                <input onChange={(event) => title.current = event.target.value} type="text" placeholder="Search..."/>
+                <button onClick={(event) => {
+                    page.current = 1
+                    refetch();
+                    event.preventDefault()
+                }}>
+                    <AiOutlineSearch/>
+                </button>
+            </Search>
+            <ProductsWrapper>
+                {data && data.data.results.map((product, index) => (
+                    <ProductCardComponent key={index} product={product}/>
+                ))}
+            </ProductsWrapper>
+            {data &&
+                <Pages>
+                    {data.data.pages.page_previous &&
+                        <>
+                            <button onClick={() => {
+                                page.current = data.data.pages.page_previous
+                                refetch()
+                            }}>{'<'}</button>
+                            <button onClick={() => {
+                                page.current = data.data.pages.page_previous
+                                refetch()
+                            }}>{data.data.pages.page_previous}</button>
+                        </>
+                    }
+                    <button class="active">{data.data.pages.page_now}</button>
+                    {data.data.pages.page_next &&
+                        <>
+                            <button onClick={() => {
+                                page.current = data.data.pages.page_next
+                                refetch()
+                            }}>{data.data.pages.page_next}</button>
+                            <button onClick={() => {
+                                page.current = data.data.pages.page_next
+                                refetch()
+                            }}>{'>'}</button>
+                        </>
+                    }
+                </Pages>
+            }
+            {/*{data && <Pagination ref={() => refetch()} pages={data.data.pages}/>}*/}
+        </>
+    );
 }

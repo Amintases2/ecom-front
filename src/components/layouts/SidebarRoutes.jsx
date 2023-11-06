@@ -9,7 +9,6 @@ import { SlLogin } from "react-icons/sl";
 import { TbMessage2Exclamation } from "react-icons/tb";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
-import { AdminContext } from "../../contexts/AdminContext";
 
 const unauthUserRoutes = {
   Log: {
@@ -45,7 +44,7 @@ const authUserRoutes = {
     links: [
       {
         title: "Выход",
-        path: "/contact-us2",
+        path: "/logout",
         icon: <ImExit />,
       },
     ],
@@ -76,8 +75,7 @@ const adminRoutes = {
 };
 
 export const SidebarRoutes = () => {
-  const userContext = useContext(AuthContext);
-  const adminContext = useContext(AdminContext);
+  const context = useContext(AuthContext);
   const routes = {
     Data: {
       title: "Data",
@@ -109,14 +107,14 @@ export const SidebarRoutes = () => {
     },
   };
 
-  if (userContext.isAuthenticated) {
+  if (context.isAuthenticated) {
     routes.Data.links = routes.Data.links.concat(authUserRoutes.Data.links);
     routes.Log.links = authUserRoutes.Log.links;
   } else {
     routes.Log.links = unauthUserRoutes.Log.links;
   }
 
-  if (adminContext.isAdmin) {
+  if (context.isAdmin) {
     routes.Admin = adminRoutes.Admin;
   }
 
