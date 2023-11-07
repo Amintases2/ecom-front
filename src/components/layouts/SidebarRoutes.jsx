@@ -57,7 +57,7 @@ const adminRoutes = {
     links: [
       {
         title: "Заявки",
-        path: "/calendar2",
+        path: "/orders",
         icon: <TbMessage2Exclamation />,
       },
       {
@@ -67,7 +67,7 @@ const adminRoutes = {
       },
       {
         title: "Настройки",
-        path: "/calendar1",
+        path: "/settings",
         icon: <FiSettings />,
       },
     ],

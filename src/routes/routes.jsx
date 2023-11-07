@@ -3,7 +3,8 @@ import ShopPage from "../pages/ShopPage.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
 import MyHistoryPage from "../pages/MyHistoryPage.jsx";
 import LogoutPage from "../pages/LogoutPage.jsx";
-
+import OrdersPage from "../pages/OrdersPage.jsx";
+import SettingsPage from "../pages/SettingsPage.jsx";
 export const ROUTES = [
   {
     path: "/",
@@ -29,17 +30,18 @@ export const ROUTES = [
     path: "/logout",
     element: <LogoutPage />,
   },
+  // admin panel
   {
-    path: "/characters",
+    path: "/orders",
+    element: <OrdersPage />,
+  },
+  {
+    path: "/products",
     element: <Homepage />,
   },
   {
-    path: "/locations",
-    element: <Homepage />,
-  },
-  {
-    path: "/episodes",
-    element: <Homepage />,
+    path: "/settings",
+    element: <SettingsPage />,
   },
   {
     path: "*",

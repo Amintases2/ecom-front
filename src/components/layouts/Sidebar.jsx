@@ -37,7 +37,7 @@ export default function Sidebar() {
           <SideBarLinks open={open} />
         </SideBarBody>
       </SidebarStyled>
-      <div style={{ padding: "20px", flex: "10%" }}>
+      <div style={{ padding: "20px", flex: "10%", overflow: "auto" }}>
         <Outlet />
       </div>
     </div>
