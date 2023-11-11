@@ -18,6 +18,16 @@ const Table = styled.table`
       color: ${bodyColors.mainTextColor};
       background-color: ${bodyColors.mainBlockBackgroundColor};
       border-bottom: 2px ${bodyColors.bodyBackgroundColor} solid;
+
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        #transform: scale(1.01);
+        #margin: 10px;
+        #zoom: 1.05;
+      }
+
+      ,
       > td {
         #flex: 1 1;
         padding: 15px 30px;

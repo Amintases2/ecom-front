@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { bodyColors } from "./global.jsx";
+import { bodyColors, device } from "./global.jsx";
 
 const LoginWrapper = styled.div`
   display: flex;
@@ -34,7 +34,6 @@ const LoginForm = styled.form`
       border: none;
 
       color: ${bodyColors.mainTextColor};
-      font-size: 1.2em;
       line-height: 2;
       outline: none;
     }
@@ -47,6 +46,16 @@ const LoginForm = styled.form`
     }
     > input[type="submit"]:hover {
       color: ${bodyColors.activeLinkColor};
+    }
+    @media ${device.mobileS} {
+      > input {
+        font-size: 1em;
+      }
+    }
+    @media ${device.mobileM} {
+      > input {
+        font-size: 1.2em;
+      }
     }
   }
 `;

@@ -16,6 +16,8 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   transition: all 0.2s ease-in-out;
+  color: ${bodyColors.mainTextColor};
+  cursor: pointer;
 `;
 const ModalContent = styled.div`
   padding: 20px;
