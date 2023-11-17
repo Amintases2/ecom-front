@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "../Modal";
 import { useForm } from "react-hook-form";
 import { LoginForm } from "../../styles/Login";
-export default function UserTr() {
+export default function UserTr({user}) {
   const [modalActive, setModalActive] = useState(false);
   const {
     register,
@@ -13,11 +13,11 @@ export default function UserTr() {
   return (
     <>
       <tr onClick={() => setModalActive(true)}>
-        <td>#1</td>
-        <td>admin</td>
-        <td>1</td>
-        <td>0</td>
-        <td>875$</td>
+        <td>{user.id}</td>
+        <td>{user.username}</td>
+        <td>{user.amount_of_deals}</td>
+        {/*<td>0</td>*/}
+        {/*<td>875$</td>*/}
       </tr>
       <Modal active={modalActive} setActive={setModalActive}>
         <LoginForm>

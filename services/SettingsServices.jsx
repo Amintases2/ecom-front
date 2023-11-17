@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-class ProductServices {
+class SettingsServices {
     cookies = new Cookies();
 
     getHeaders() {
@@ -13,14 +13,12 @@ class ProductServices {
         };
     }
 
-    async getProducts(title, page = 1) {
-        if (title) {
-            return await axios.get(`http://127.0.0.1:8000/api/products/?title=${title}&page=${page}`)
-        }
-        return await axios.get(`http://127.0.0.1:8000/api/products/?page=${page}`)
+    async getSettings(){
+        const headers = this.getHeaders()
+        const url = `http://127.0.0.1:8000/api/settings/1/`
+        return await axios.get(url, {headers})
     }
-
 
 }
 
-export default new ProductServices();
+export default new SettingsServices();

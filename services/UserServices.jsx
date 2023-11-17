@@ -2,59 +2,69 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 class UserServices {
-  cookies = new Cookies();
+    cookies = new Cookies();
 
-  getHeaders() {
-    const token = this.cookies.get("token");
-    return {
-      Authorization: `Token ${token}`,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
-  }
+    getHeaders() {
+        const token = this.cookies.get("token");
+        return {
+            Authorization: `Token ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        };
+    }
 
-  async authUser({ username, password }, setAuth, setAdmin, navigate) {
-    setAdmin(true);
-    setAuth(true);
-    const url = "http://127.0.0.1:8000/api/auth/token/login";
-    const postData = {
-      username: username,
-      password: password,
-    };
-    await axios.post(url, postData).then(async (res) => {
-      this.cookies.set("token", res.data.auth_token);
-      await this.identifyUser(setAuth, setAdmin);
-      await navigate("/");
-    });
-  }
+    async authUser({username, password}, setAuth, setAdmin, navigate) {
+        const url = "http://127.0.0.1:8000/api/auth/token/login";
+        const postData = {
+            username: username,
+            password: password,
+        };
+        await axios.post(url, postData).then(async (res) => {
+            this.cookies.set("token", res.data.auth_token);
+            await this.identifyUser(setAuth, setAdmin);
+            await navigate("/");
+        });
+    }
 
-  async identifyUser(setAuth, setAdmin) {
-    const url = "http://127.0.0.1:8000/api/auth/me";
-    const headers = this.getHeaders();
-    await axios.get(url, { headers }).then((res) => {
-      if (res.data.is_staff) {
-        setAdmin(true);
-      }
-      setAuth(true);
-      this.cookies.set("first_name", res.data.first_name);
-      this.cookies.set("last_name", res.data.last_name);
-    });
-  }
+    async identifyUser(setAuth, setAdmin) {
+        const url = "http://127.0.0.1:8000/api/auth/me";
+        const headers = this.getHeaders();
+        await axios.get(url, {headers}).then((res) => {
+            if (res.data.is_staff) {
+                setAdmin(true);
+            }
+            setAuth(true);
+            this.cookies.set("first_name", res.data.first_name);
+            this.cookies.set("last_name", res.data.last_name);
+            this.cookies.set("amount_of_deals", res.data.amount_of_deals);
+        });
+    }
 
-  getUserInfo() {
-    const firstName = this.cookies.get("first_name");
-    const lastName = this.cookies.get("last_name");
-    return { firstName, lastName };
-  }
+    async getAllUsers(title) {
+        const headers = this.getHeaders()
+        if (title) {
+            return await axios.get(`http://127.0.0.1:8000/api/users/?title=${title}`, {headers})
+        } else {
+            return await axios.get('http://127.0.0.1:8000/api/users/', {headers})
+        }
 
-  logoutUser(setAuth, setAdmin, navigate) {
-    this.cookies.remove("token", { path: "/" });
-    this.cookies.remove("first_name", { path: "/" });
-    this.cookies.remove("last_name", { path: "/" });
-    setAuth(false);
-    setAdmin(false);
-    navigate("/login");
-  }
+    }
+
+    getUserInfo() {
+        const firstName = this.cookies.get("first_name");
+        const lastName = this.cookies.get("last_name");
+        const amount_of_deals = this.cookies.get("amount_of_deals");
+        return {firstName, lastName, amount_of_deals};
+    }
+
+    logoutUser(setAuth, setAdmin, navigate) {
+        this.cookies.remove("token", {path: "/"});
+        this.cookies.remove("first_name", {path: "/"});
+        this.cookies.remove("last_name", {path: "/"});
+        setAuth(false);
+        setAdmin(false);
+        navigate("/login");
+    }
 }
 
 export default new UserServices();

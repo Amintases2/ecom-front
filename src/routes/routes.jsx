@@ -5,6 +5,7 @@ import MyHistoryPage from "../pages/MyHistoryPage.jsx";
 import LogoutPage from "../pages/LogoutPage.jsx";
 import OrdersPage from "../pages/OrdersPage.jsx";
 import SettingsPage from "../pages/SettingsPage.jsx";
+import ProductsPage from "../pages/ProductsPage.jsx";
 export const ROUTES = [
   {
     path: "/",
@@ -37,7 +38,7 @@ export const ROUTES = [
   },
   {
     path: "/products",
-    element: <Homepage />,
+    element: <ProductsPage />,
   },
   {
     path: "/settings",

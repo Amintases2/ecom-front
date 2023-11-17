@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { bodyColors, device } from "./global.jsx";
+import {bodyColors, device} from "./global.jsx";
 
 const LoginWrapper = styled.div`
   display: flex;
@@ -28,7 +28,10 @@ const LoginForm = styled.form`
       font-size: 1.2em;
       display: block;
     }
-    > input {
+    > input,
+    textarea {
+      box-sizing: border-box;
+      width: 100%;
       padding: 5px 10px;
       background-color: ${bodyColors.bodyBackgroundColor};
       border: none;
@@ -48,12 +51,14 @@ const LoginForm = styled.form`
       color: ${bodyColors.activeLinkColor};
     }
     @media ${device.mobileS} {
-      > input {
+      > input,
+      textarea {
         font-size: 1em;
       }
     }
     @media ${device.mobileM} {
-      > input {
+      > input,
+      textarea {
         font-size: 1.2em;
       }
     }
@@ -71,4 +76,4 @@ const CheckBoxWrapper = styled.div`
   }
 `;
 
-export { LoginWrapper, LoginForm, CheckBoxWrapper };
+export {LoginWrapper, LoginForm, CheckBoxWrapper};

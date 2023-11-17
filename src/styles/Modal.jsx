@@ -28,9 +28,23 @@ const ModalContent = styled.div`
   transition: all 0.2s ease-in-out;
   > div {
     max-width: 500px;
+    > .img-wrapper {
+      text-align: center;
+      > img {
+        aling-text: center;
+        width: 250px;
+      }
+    }
   }
   @media ${device.tablet} {
     height: auto;
+    div {
+      > .img-wrapper {
+        > img {
+          width: 400px;
+        }
+      }
+    }
   }
 `;
 const SvgClose = styled.div`
